@@ -1,0 +1,8 @@
+# Minimal requirements for Python 3.8 compatibility
+fastapi
+uvicorn
+websockets
+python-multipart
+pydantic
+httpx
+asyncio

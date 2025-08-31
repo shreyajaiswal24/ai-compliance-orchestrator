@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  # MongoDB for state management
+  mongodb:
+    image: mongo:7.0
+    container_name: compliance-mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: compliance_orchestrator
+    volumes:
+      - mongodb_data:/data/db
+    restart: unless-stopped
+
+  # Redis for caching
+  redis:
+    image: redis:7.0-alpine
+    container_name: compliance-redis
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
+  # Main application server
+  server:
+    build: 
+      context: .
+      dockerfile: server/Dockerfile
+    container_name: compliance-server
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGODB_URL=mongodb://mongodb:27017
+      - REDIS_URL=redis://redis:6379
+      - DB_NAME=compliance_orchestrator
+    depends_on:
+      - mongodb
+      - redis
+    volumes:
+      - ./temp:/app/temp
+    restart: unless-stopped
+
+volumes:
+  mongodb_data:
+  redis_data:

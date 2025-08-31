@@ -1,0 +1,29 @@
+# Core Framework
+fastapi>=0.68.0,<1.0.0
+uvicorn[standard]>=0.15.0
+websockets>=10.0
+python-multipart>=0.0.5
+
+# Database & Caching  
+motor>=3.0.0
+pymongo>=4.0.0
+redis>=4.0.0
+
+# Vector Database & ML
+faiss-cpu>=1.7.0
+sentence-transformers>=2.0.0
+numpy>=1.21.0,<2.0.0
+
+# Data Processing
+pydantic>=1.8.0,<3.0.0
+PyPDF2>=2.0.0
+pytesseract>=0.3.8
+Pillow>=8.0.0
+
+# Async & Reliability
+httpx>=0.24.0
+tenacity>=8.0.0
+
+# Development
+pytest>=6.0.0
+pytest-asyncio>=0.18.0
